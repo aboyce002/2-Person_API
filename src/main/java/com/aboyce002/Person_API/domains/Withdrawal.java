@@ -5,18 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Deposit {
+public class Withdrawal {
     @Id
-    @Column(name="DEPOSIT_ID")
-    private Long id;
+    @Column(name = "WITHDRAW_ID")
+    private Long _id;
 
     private String type;
 
-    private String transaction_date;
+    private String transactionDate;
 
     private String status;
 
-    private Long payee_id;
+    private Long payerId;
 
     private String medium;
 
@@ -24,26 +24,12 @@ public class Deposit {
 
     private String description;
 
-    public Deposit() {
-    }
-
-    public Deposit(Long id, String type, String transaction_date, String status, Long payee_id, String medium, Double amount, String description) {
-        this.id = id;
-        this.type = type;
-        this.transaction_date = transaction_date;
-        this.status = status;
-        this.payee_id = payee_id;
-        this.medium = medium;
-        this.amount = amount;
-        this.description = description;
-    }
-
     public Long getId() {
-        return id;
+        return _id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this._id = _id;
     }
 
     public String getType() {
@@ -54,12 +40,12 @@ public class Deposit {
         this.type = type;
     }
 
-    public String getTransaction_date() {
-        return transaction_date;
+    public String getTransactionDate() {
+        return transactionDate;
     }
 
-    public void setTransaction_date(String transaction_date) {
-        this.transaction_date = transaction_date;
+    public void setTransactionDate(String transactionDate) {
+        this.transactionDate = transactionDate;
     }
 
     public String getStatus() {
@@ -70,12 +56,12 @@ public class Deposit {
         this.status = status;
     }
 
-    public Long getPayee_id() {
-        return payee_id;
+    public Long getPayerId() {
+        return payerId;
     }
 
-    public void setPayee_id(Long payee_id) {
-        this.payee_id = payee_id;
+    public void setPayerId(Long payerId) {
+        this.payerId = payerId;
     }
 
     public String getMedium() {
@@ -104,12 +90,12 @@ public class Deposit {
 
     @Override
     public String toString() {
-        return "Deposit{" +
-                "id=" + id +
+        return "Withdrawal{" +
+                "id=" + _id +
                 ", type='" + type + '\'' +
-                ", transaction_date='" + transaction_date + '\'' +
+                ", transactionDate='" + transactionDate + '\'' +
                 ", status='" + status + '\'' +
-                ", payee_id=" + payee_id +
+                ", payerId=" + payerId +
                 ", medium='" + medium + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
