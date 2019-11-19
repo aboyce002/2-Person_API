@@ -4,15 +4,12 @@ import com.aboyce002.Person_API.domains.Bill;
 import com.aboyce002.Person_API.domains.response.ResponseStateReturn;
 import com.aboyce002.Person_API.services.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
