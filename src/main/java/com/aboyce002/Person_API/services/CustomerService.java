@@ -1,6 +1,8 @@
 package com.aboyce002.Person_API.services;
 
+import com.aboyce002.Person_API.domains.Account;
 import com.aboyce002.Person_API.domains.Customer;
+import com.aboyce002.Person_API.repository.AccountRepository;
 import com.aboyce002.Person_API.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,35 +16,43 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
-
     @Autowired
-    private CustomerService customerService;
+    private AccountRepository accountRepository;
 
-public List<Customer> getAccountForCus(Long customerId) {
-    List<Customer> listOfAccForCus = new ArrayList<>();
-    customerRepository.findAll().forEach(listOfAccForCus::add);
-    return listOfAccForCus;
-}
+    public List<Customer> getAccountForCustomer(Long accountId) {
+        List<Customer> listOfCustomers = new ArrayList<>();
+        if (!accountRepository.findAccountById(accountId).isEmpty()){
+            customerRepository.findAll().forEach(listOfCustomers::add);
+            Account a = (Account) accountRepository.findAccountById(accountId);
 
-public List<Customer> getAllCustomers(Long id) {
-    List<Customer> listOfCustomers = new ArrayList<>();
-    customerRepository.findAll().forEach(listOfCustomers::add);
-    return listOfCustomers;
-}
+            if(a != null){
+                List<Customer> validDeposits = new ArrayList<>();
+                for(Customer c : listOfCustomers){
+                    if(c.getId() == a.getCustomerId())
+                        validDeposits.add(c);
+                }
+                return validDeposits;
+            }
+        }
+        return null;
+    }
 
-public Optional<Customer> getCustomerById(Long id) {
-    return customerRepository.findById(id);
-}
+    public List<Customer> getAllCustomers() {
+        List<Customer> listOfCustomers = new ArrayList<>();
+        customerRepository.findAll().forEach(listOfCustomers::add);
+        return listOfCustomers;
+    }
 
-public void createCustomer(Customer customer) {
-    customerRepository.save(customer);
-}
+    public Optional<Customer> getCustomerById(Long id) {
+        return customerRepository.findById(id);
+    }
 
-public Customer updateCustomer(Long customerId, Customer customer) {
-    customer.setId(customerId);
-    return customerRepository.save(customer);
-}
+    public Customer createCustomer(Customer customer) {
+        return customerRepository.save(customer);
+    }
 
-
-
+    public Customer updateCustomer(Long customerId, Customer customer) {
+        customer.setId(customerId);
+        return customerRepository.save(customer);
+    }
 }

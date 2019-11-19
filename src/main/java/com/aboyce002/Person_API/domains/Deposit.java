@@ -9,19 +9,12 @@ public class Deposit {
     @Id
     @Column(name="DEPOSIT_ID")
     private Long id;
-
     private String type;
-
     private String transaction_date;
-
     private String status;
-
     private Long payee_id;
-
     private String medium;
-
     private Double amount;
-
     private String description;
 
     public Deposit() {
