@@ -15,9 +15,6 @@ public class BillService {
     @Autowired
     private BillRepository billRepository;
 
-    @Autowired
-    private BillService billService;
-
     public List<Bill> getAllBillsByAcc(Long accountId) {
         List<Bill> listOfBills = new ArrayList<>();
         billRepository.findAll().forEach(listOfBills::add);
@@ -38,9 +35,9 @@ public class BillService {
         billRepository.save(bill);
     }
 
-    public Bill updateBill(Long id, Bill bill) {
+    public void updateBill(Long id, Bill bill) {
         bill.setId(id);
-        return billRepository.save(bill);
+        billRepository.save(bill);
     }
 
     public void deleteBill(Long id) {

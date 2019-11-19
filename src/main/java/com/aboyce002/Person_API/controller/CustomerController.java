@@ -1,11 +1,7 @@
 package com.aboyce002.Person_API.controller;
 
-import com.aboyce002.Person_API.domains.Account;
-import com.aboyce002.Person_API.domains.Address;
-import com.aboyce002.Person_API.domains.Bill;
 import com.aboyce002.Person_API.domains.Customer;
 import com.aboyce002.Person_API.domains.response.ResponseStateReturn;
-import com.aboyce002.Person_API.services.AccountService;
 import com.aboyce002.Person_API.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
