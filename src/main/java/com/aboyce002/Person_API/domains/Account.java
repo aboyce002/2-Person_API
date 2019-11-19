@@ -13,9 +13,7 @@ public class Account {
     private Type type;
 
     private String nickname;
-
     private int rewards;
-
     private double balance;
 
     @Column(name="CustomerID")

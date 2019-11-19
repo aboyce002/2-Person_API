@@ -1,40 +1,48 @@
 package com.aboyce002.Person_API.services;
 
 import com.aboyce002.Person_API.domains.Withdrawal;
-import com.aboyce002.Person_API.domains.response.ResponseStateReturn;
+import com.aboyce002.Person_API.repository.AccountRepository;
 import com.aboyce002.Person_API.repository.WithdrawalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class WithdrawalService {
     @Autowired
     private WithdrawalRepository withdrawalRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
-    public List<Withdrawal> getAllWithdrawals(){
+    public List<Withdrawal> getAllWithdrawalsForAccount(Long accountId){
         List<Withdrawal> listOfWithdrawals = new ArrayList<>();
-        withdrawalRepository.findAll().forEach(listOfWithdrawals::add);
-        return listOfWithdrawals;
+        if (!accountRepository.findAccountById(accountId).isEmpty()){
+            withdrawalRepository.findAll().forEach(listOfWithdrawals::add);
+
+            List<Withdrawal> validDeposits = new ArrayList<>();
+            for(Withdrawal w: listOfWithdrawals){
+                if(w.getPayerId() == accountId)
+                    validDeposits.add(w);
+            }
+            return validDeposits;
+        }
+        return null;
     }
 
-    public Optional<Withdrawal> getWithdrawalById(long id){
-        return withdrawalRepository.findById(id);
+    public Optional<Withdrawal> getWithdrawalById(Long withdrawalId){
+        return withdrawalRepository.findById(withdrawalId);
     }
 
-    public void addWithdrawal(Withdrawal withdrawal) {
-        withdrawalRepository.save(withdrawal);
+    public Withdrawal addWithdrawal(Withdrawal withdrawal) {
+        return withdrawalRepository.save(withdrawal);
     }
 
-    public void updateWithdrawal(long id, Withdrawal withdrawal) {
-        withdrawalRepository.save(withdrawal);
+    public Withdrawal updateWithdrawal(Long id, Withdrawal withdrawal) {
+        return withdrawalRepository.save(withdrawal);
     }
 
-    public void deleteWithdrawal(long id) {
+    public void deleteWithdrawal(Long id) {
         withdrawalRepository.deleteById(id);
     }
 }

@@ -9,19 +9,12 @@ public class Withdrawal {
     @Id
     @Column(name = "WITHDRAW_ID")
     private Long _id;
-
     private String type;
-
     private String transactionDate;
-
     private String status;
-
     private Long payerId;
-
     private String medium;
-
     private Double amount;
-
     private String description;
 
     public Long getId() {

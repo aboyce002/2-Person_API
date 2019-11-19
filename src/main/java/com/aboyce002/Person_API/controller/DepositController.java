@@ -80,7 +80,7 @@ public class DepositController {
         }
         else{
             rep.setCode(HttpStatus.NOT_FOUND.value());
-            rep.setMessage("Error creating deposit: Account not found”");
+            rep.setMessage("Error creating deposit: Account not found");
             return new ResponseEntity<>(rep, HttpStatus.NOT_FOUND);
         }
     }
