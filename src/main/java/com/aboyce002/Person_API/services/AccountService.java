@@ -4,11 +4,13 @@ import com.aboyce002.Person_API.domains.Account;
 import com.aboyce002.Person_API.repository.AccountRepository;
 import com.aboyce002.Person_API.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class AccountService {
     @Autowired
     private AccountRepository accountRepository;

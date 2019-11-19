@@ -21,19 +21,19 @@ public class CustomerService {
 
     public List<Customer> getAccountForCustomer(Long accountId) {
         List<Customer> listOfCustomers = new ArrayList<>();
-        if (!accountRepository.findAccountById(accountId).isEmpty()){
+        Optional<Account> acc = accountRepository.findById(accountId);
+        if (acc.isPresent()){
             customerRepository.findAll().forEach(listOfCustomers::add);
-            Account a = (Account) accountRepository.findAccountById(accountId);
+            List<Account> accList = accountRepository.findAccountById(accountId);
+            Account a = accList.get(0);
 
-            if(a != null){
-                List<Customer> validDeposits = new ArrayList<>();
-                for(Customer c : listOfCustomers){
-                    if(c.getId() == a.getCustomerId())
-                        validDeposits.add(c);
-                }
+            List<Customer> validDeposits = new ArrayList<>();
+            for(Customer c : listOfCustomers){
+                if(c.getId() == a.getCustomerId())
+                    validDeposits.add(c);
+            }
                 return validDeposits;
             }
-        }
         return null;
     }
 

@@ -1,32 +1,37 @@
 package com.aboyce002.Person_API.domains;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Deposit {
+
+    @Enumerated(EnumType.STRING)
+    private DepoWithType type;
+
+    @Enumerated(EnumType.STRING)
+    private Medium medium;
+
+    @Enumerated(EnumType.STRING)
+    private DepoWithStatus status;
+
     @Id
     @Column(name="DEPOSIT_ID")
     private Long id;
-    private String type;
     private String transaction_date;
-    private String status;
     private Long payee_id;
-    private String medium;
     private Double amount;
     private String description;
 
     public Deposit() {
     }
 
-    public Deposit(Long id, String type, String transaction_date, String status, Long payee_id, String medium, Double amount, String description) {
-        this.id = id;
+    public Deposit(DepoWithType type, Medium medium, DepoWithStatus status, Long id, String transaction_date, Long payee_id, Double amount, String description) {
         this.type = type;
-        this.transaction_date = transaction_date;
-        this.status = status;
-        this.payee_id = payee_id;
         this.medium = medium;
+        this.status = status;
+        this.id = id;
+        this.transaction_date = transaction_date;
+        this.payee_id = payee_id;
         this.amount = amount;
         this.description = description;
     }
@@ -39,11 +44,11 @@ public class Deposit {
         this.id = id;
     }
 
-    public String getType() {
+    public DepoWithType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(DepoWithType type) {
         this.type = type;
     }
 
@@ -55,11 +60,11 @@ public class Deposit {
         this.transaction_date = transaction_date;
     }
 
-    public String getStatus() {
+    public DepoWithStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(DepoWithStatus status) {
         this.status = status;
     }
 
@@ -71,11 +76,11 @@ public class Deposit {
         this.payee_id = payee_id;
     }
 
-    public String getMedium() {
+    public Medium getMedium() {
         return medium;
     }
 
-    public void setMedium(String medium) {
+    public void setMedium(Medium medium) {
         this.medium = medium;
     }
 
@@ -98,12 +103,12 @@ public class Deposit {
     @Override
     public String toString() {
         return "Deposit{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
+                "type=" + type +
+                ", medium=" + medium +
+                ", status=" + status +
+                ", id=" + id +
                 ", transaction_date='" + transaction_date + '\'' +
-                ", status='" + status + '\'' +
                 ", payee_id=" + payee_id +
-                ", medium='" + medium + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 '}';
