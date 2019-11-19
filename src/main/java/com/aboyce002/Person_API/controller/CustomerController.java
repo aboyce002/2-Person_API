@@ -59,7 +59,7 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/{id}")
-    public ResponseEntity<?> getCustomerById(@PathVariable("customerId") Long id) {
+    public ResponseEntity<?> getCustomerById(@PathVariable Long id) {
         ResponseStateReturn rep = new ResponseStateReturn();
         Optional<Customer> customer = customerService.getCustomerById(id);
 
@@ -78,7 +78,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customers")
-    public ResponseEntity<?> createCustomer(@RequestBody Customer customer, @PathVariable("accountId") Long id) {
+    public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
         ResponseStateReturn rep = new ResponseStateReturn();
         Customer c = customerService.createCustomer(customer);
 
@@ -105,7 +105,7 @@ public class CustomerController {
     }
 
     @PutMapping("/customers/{id}")
-    public ResponseEntity<?> updateCustomer(@PathVariable("customerId") Long id, @RequestBody Customer customer) {
+    public ResponseEntity<?> updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
         ResponseStateReturn rep = new ResponseStateReturn();
         Customer uCustomer = customerService.updateCustomer(id, customer);
 

@@ -50,7 +50,7 @@ public class BillController {
     }
 
     @GetMapping("/customers/{customerId}/bills")
-    public ResponseEntity<?> getAllBillsForCus(@PathVariable("customerId") Long id, @RequestBody Bill bill) {
+    public ResponseEntity<?> getAllBillsForCus(@PathVariable Long id) {
         ResponseStateReturn rep = new ResponseStateReturn();
         if(!billService.existsById(id)) {
             rep.setCode(HttpStatus.NOT_FOUND.value());

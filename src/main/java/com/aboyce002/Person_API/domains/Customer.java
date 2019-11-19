@@ -1,21 +1,23 @@
 package com.aboyce002.Person_API.domains;
 
-import org.apache.tomcat.jni.Address;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Customer {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String first_name;
     private String last_name;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="CUSTOMER_ID")
+    @OrderBy
     private Set<Address> address;
+
+    public Customer() {
+    }
 
     public Customer(Long id, String first_name, String last_name, Set<Address> address) {
         this.id = id;

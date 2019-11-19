@@ -2,13 +2,14 @@ package com.aboyce002.Person_API.domains;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Bill {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String status;
     private String payee;
@@ -19,6 +20,9 @@ public class Bill {
     private String upcoming_payment_date;
     private Double payment_amount;
     private String account_id;
+
+    public Bill() {
+    }
 
     public Bill(Long id, String status, String payee, String nickname, String creation_date, String payment_date, Integer recurring_date, String upcoming_payment_date, Double payment_amount, String account_id) {
         this.id = id;

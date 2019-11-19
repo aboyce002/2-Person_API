@@ -8,15 +8,12 @@ public class Account {
     @Column(name="ACCOUNT_ID")
     private Long id;
 
-    @Column(name="Type")
     @Enumerated(EnumType.STRING)
     private Type type;
 
     private String nickname;
     private int rewards;
     private double balance;
-
-    @Column(name="CustomerID")
     private Long customerId;
 
     public Account() {

@@ -1,20 +1,21 @@
 package com.aboyce002.Person_API.domains;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Address {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name= "ADDRESS_ID")
     private Long id;
     private String street_number;
     private String street_name;
     private String city;
     private String state;
     private String zip;
+
+    public Address() {
+    }
 
     public Address(Long id, String street_number, String street_name, String city, String state, String zip) {
         this.id = id;
