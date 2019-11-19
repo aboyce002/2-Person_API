@@ -1,6 +1,7 @@
 package com.aboyce002.Person_API.services;
 
 import com.aboyce002.Person_API.domains.Bill;
+import com.aboyce002.Person_API.repository.AccountRepository;
 import com.aboyce002.Person_API.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ public class BillService {
 
     @Autowired
     private BillRepository billRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
     public List<Bill> getAllBillsByAcc(Long accountId) {
         List<Bill> listOfBills = new ArrayList<>();
@@ -31,8 +34,10 @@ public class BillService {
         return listOfBillsForCus;
     }
 
-    public void createBill(Bill bill) {
-        billRepository.save(bill);
+    public Bill createBill(Bill bill, Long id) {
+        if (accountRepository.findById(id).isPresent())
+            return billRepository.save(bill);
+        return null;
     }
 
     public void updateBill(Long id, Bill bill) {

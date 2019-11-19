@@ -1,35 +1,54 @@
 package com.aboyce002.Person_API.domains;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Withdrawal {
+
+    @Enumerated(EnumType.STRING)
+    private DepoWithType type;
+
+    @Enumerated(EnumType.STRING)
+    private Medium medium;
+
+    @Enumerated(EnumType.STRING)
+    private DepoWithStatus status;
+
     @Id
     @Column(name = "WITHDRAW_ID")
-    private Long _id;
-    private String type;
+    private Long id;
     private String transactionDate;
-    private String status;
     private Long payerId;
-    private String medium;
     private Double amount;
     private String description;
 
+    public Withdrawal() {
+    }
+
+    public Withdrawal(DepoWithType type, Medium medium, DepoWithStatus status, Long id, String transactionDate, Long payerId, Double amount, String description) {
+        this.type = type;
+        this.medium = medium;
+        this.status = status;
+        this.id = id;
+        this.transactionDate = transactionDate;
+        this.payerId = payerId;
+        this.amount = amount;
+        this.description = description;
+    }
+
     public Long getId() {
-        return _id;
+        return id;
     }
 
     public void setId(Long id) {
-        this._id = _id;
+        this.id = id;
     }
 
-    public String getType() {
+    public DepoWithType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(DepoWithType type) {
         this.type = type;
     }
 
@@ -41,11 +60,11 @@ public class Withdrawal {
         this.transactionDate = transactionDate;
     }
 
-    public String getStatus() {
+    public DepoWithStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(DepoWithStatus status) {
         this.status = status;
     }
 
@@ -57,11 +76,11 @@ public class Withdrawal {
         this.payerId = payerId;
     }
 
-    public String getMedium() {
+    public Medium getMedium() {
         return medium;
     }
 
-    public void setMedium(String medium) {
+    public void setMedium(Medium medium) {
         this.medium = medium;
     }
 
@@ -84,12 +103,12 @@ public class Withdrawal {
     @Override
     public String toString() {
         return "Withdrawal{" +
-                "id=" + _id +
-                ", type='" + type + '\'' +
+                "type=" + type +
+                ", medium=" + medium +
+                ", status=" + status +
+                ", id=" + id +
                 ", transactionDate='" + transactionDate + '\'' +
-                ", status='" + status + '\'' +
                 ", payerId=" + payerId +
-                ", medium='" + medium + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 '}';

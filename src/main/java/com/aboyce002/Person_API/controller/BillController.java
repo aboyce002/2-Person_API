@@ -67,14 +67,15 @@ public class BillController {
     @PostMapping("/accounts/{accountId}/bills")
     public ResponseEntity<?> createBill(@RequestBody Bill bill, @PathVariable("accountId") Long id) {
         ResponseStateReturn rep = new ResponseStateReturn();
-        if(!billService.existsById(id)) {
+        Bill b = billService.createBill(bill, id);
+        if(b == null) {
             rep.setCode(HttpStatus.NOT_FOUND.value());
             rep.setMessage("Error creating bill: Account not found");
             return new ResponseEntity<>(rep, HttpStatus.NOT_FOUND);
         }else{
             rep.setCode(HttpStatus.CREATED.value());
+            rep.setMessage("Created bill and added it to the account");
             rep.setData(new ArrayList<>(Collections.singleton(bill)));
-            billService.createBill(bill);
             return new ResponseEntity<>(rep, HttpStatus.CREATED);
         }
     }
