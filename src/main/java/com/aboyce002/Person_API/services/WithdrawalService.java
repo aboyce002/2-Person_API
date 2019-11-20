@@ -1,5 +1,6 @@
 package com.aboyce002.Person_API.services;
 
+import com.aboyce002.Person_API.domains.Account;
 import com.aboyce002.Person_API.domains.Withdrawal;
 import com.aboyce002.Person_API.repository.AccountRepository;
 import com.aboyce002.Person_API.repository.WithdrawalRepository;
@@ -19,17 +20,19 @@ public class WithdrawalService {
 
     public List<Withdrawal> getAllWithdrawalsForAccount(Long accountId){
         List<Withdrawal> listOfWithdrawals = new ArrayList<>();
-        if (!accountRepository.findAccountById(accountId).isEmpty()){
-            withdrawalRepository.findAll().forEach(listOfWithdrawals::add);
+        Optional<Account> acc = accountRepository.findById(accountId);
+        if (acc.isPresent()){
+            listOfWithdrawals = withdrawalRepository.findAllByPayerId(accountId);
+            /*List<Account> accList = accountRepository.findAccountById(accountId);
+            Account a = accList.get(0);
 
             List<Withdrawal> validDeposits = new ArrayList<>();
             for(Withdrawal w: listOfWithdrawals){
-                if(w.getPayerId() == accountId)
-                    validDeposits.add(w);
-            }
-            return validDeposits;
+                if(w.getPayerId().equals(accountId))
+                    validDeposits.add(w);*/
+            return listOfWithdrawals;
         }
-        return null;
+        return listOfWithdrawals;
     }
 
     public Optional<Withdrawal> getWithdrawalById(Long withdrawalId){

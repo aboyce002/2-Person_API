@@ -18,22 +18,32 @@ public class Deposit {
     @Column(name="DEPOSIT_ID")
     private Long id;
     private String transaction_date;
-    private Long payee_id;
+    private Long payeeId;
     private Double amount;
     private String description;
+    private Long accountId;
 
     public Deposit() {
     }
 
-    public Deposit(DepoWithType type, Medium medium, DepoWithStatus status, Long id, String transaction_date, Long payee_id, Double amount, String description) {
+    public Deposit(DepoWithType type, Medium medium, DepoWithStatus status, Long id, String transaction_date, Long payeeId, Double amount, String description, Long accountId) {
         this.type = type;
         this.medium = medium;
         this.status = status;
         this.id = id;
         this.transaction_date = transaction_date;
-        this.payee_id = payee_id;
+        this.payeeId = payeeId;
         this.amount = amount;
         this.description = description;
+        this.accountId = accountId;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public Long getId() {
@@ -68,12 +78,12 @@ public class Deposit {
         this.status = status;
     }
 
-    public Long getPayee_id() {
-        return payee_id;
+    public Long getPayeeId() {
+        return payeeId;
     }
 
-    public void setPayee_id(Long payee_id) {
-        this.payee_id = payee_id;
+    public void setPayeeId(Long payeeId) {
+        this.payeeId = payeeId;
     }
 
     public Medium getMedium() {
@@ -108,7 +118,7 @@ public class Deposit {
                 ", status=" + status +
                 ", id=" + id +
                 ", transaction_date='" + transaction_date + '\'' +
-                ", payee_id=" + payee_id +
+                ", payeeId=" + payeeId +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 '}';

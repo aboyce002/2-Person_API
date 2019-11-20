@@ -1,5 +1,6 @@
 package com.aboyce002.Person_API.services;
 
+import com.aboyce002.Person_API.domains.Account;
 import com.aboyce002.Person_API.domains.Deposit;
 import com.aboyce002.Person_API.repository.AccountRepository;
 import com.aboyce002.Person_API.repository.Depository;
@@ -19,17 +20,21 @@ public class DepositService {
 
     public List<Deposit> getAllDepositsForAccount(Long accountId) {
         List<Deposit> listOfDeposits = new ArrayList<>();
-        if (!accountRepository.findAccountById(accountId).isEmpty()){
-            depository.findAll().forEach(listOfDeposits::add);
+        Optional<Account> acc = accountRepository.findById(accountId);
+        if (acc.isPresent()){
+            listOfDeposits = depository.findAllByPayeeId(accountId);
+            /*depository.findAll().forEach(listOfDeposits::add);
+            List<Account> accList = accountRepository.findAccountById(accountId);
+            Account a = accList.get(0);
 
             List<Deposit> validDeposits = new ArrayList<>();
             for(Deposit d : listOfDeposits){
-                if(d.getPayee_id() == accountId)
+                if(d.getPayee_id() == a.getCustomerId())
                     validDeposits.add(d);
-            }
-            return validDeposits;
+            }*/
+            return listOfDeposits;
         }
-        return null;
+        return listOfDeposits;
     }
 
     public Optional<Deposit> getDepositById(Long depositId) {

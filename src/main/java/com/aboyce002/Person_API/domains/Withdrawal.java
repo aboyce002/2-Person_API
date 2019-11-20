@@ -21,11 +21,12 @@ public class Withdrawal {
     private Long payerId;
     private Double amount;
     private String description;
+    private Long accountId;
 
     public Withdrawal() {
     }
 
-    public Withdrawal(DepoWithType type, Medium medium, DepoWithStatus status, Long id, String transactionDate, Long payerId, Double amount, String description) {
+    public Withdrawal(DepoWithType type, Medium medium, DepoWithStatus status, Long id, String transactionDate, Long payerId, Double amount, String description, Long accountId) {
         this.type = type;
         this.medium = medium;
         this.status = status;
@@ -34,6 +35,15 @@ public class Withdrawal {
         this.payerId = payerId;
         this.amount = amount;
         this.description = description;
+        this.accountId = accountId;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public Long getId() {

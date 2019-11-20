@@ -27,14 +27,14 @@ public class CustomerService {
             List<Account> accList = accountRepository.findAccountById(accountId);
             Account a = accList.get(0);
 
-            List<Customer> validDeposits = new ArrayList<>();
+            List<Customer> validCustomers = new ArrayList<>();
             for(Customer c : listOfCustomers){
                 if(c.getId() == a.getCustomerId())
-                    validDeposits.add(c);
+                    validCustomers.add(c);
             }
-                return validDeposits;
+                return validCustomers;
             }
-        return null;
+        return listOfCustomers;
     }
 
     public List<Customer> getAllCustomers() {

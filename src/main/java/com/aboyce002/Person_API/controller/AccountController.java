@@ -123,7 +123,7 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/accounts/{id}")
-    public ResponseEntity<?> deleteAccount(@RequestBody Long id){
+    public ResponseEntity<?> deleteAccount(@PathVariable Long id){
         ResponseStateReturn rep = new ResponseStateReturn();
 
         if(accountService.deleteAccount(id)){

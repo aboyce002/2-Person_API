@@ -90,7 +90,7 @@ public class BillController {
         }else{
             billService.updateBill(id, bill);
             rep.setCode(HttpStatus.ACCEPTED.value());
-            rep.setMessage("Accepted deposit modification");
+            rep.setMessage("Accepted bill modification");
             return new ResponseEntity<>(rep, HttpStatus.ACCEPTED);
         }
     }
@@ -98,7 +98,7 @@ public class BillController {
     @DeleteMapping("/bills/{billId}")
     public ResponseEntity<?> deleteBill(@PathVariable("billId") Long id) {
         ResponseStateReturn rep = new ResponseStateReturn();
-        if(billService.existsById(id)) {
+        if(!billService.existsById(id)) {
             rep.setCode(HttpStatus.NOT_FOUND.value());
             rep.setMessage("This id does not exist in bills");
             return new ResponseEntity<>(rep, HttpStatus.NOT_FOUND);
