@@ -86,9 +86,9 @@ public class WithdrawalController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/withdrawals/{withdrawalId}")
-    public ResponseEntity<?> updateWithdrawal(@PathVariable long id, @RequestBody Withdrawal withdrawal){
+    public ResponseEntity<?> updateWithdrawal(@PathVariable long withdrawalId, @RequestBody Withdrawal withdrawal){
         ResponseStateReturn rep = new ResponseStateReturn();
-        Withdrawal uWithdrawal = withdrawalService.updateWithdrawal(id, withdrawal);
+        Withdrawal uWithdrawal = withdrawalService.updateWithdrawal(withdrawalId, withdrawal);
 
         if(uWithdrawal != null){
             rep.setCode(HttpStatus.ACCEPTED.value());
